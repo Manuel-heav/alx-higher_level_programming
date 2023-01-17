@@ -1,6 +1,14 @@
 #!/usr/bin/node
+// Print the title of the Star Wars episode passed as argument
+
 const request = require('request');
-let url = 'https://swapi-api.hbtn.io/api/films/' + process.argv[2];
-request(url, function (error, response, body) {
-  console.log(error || JSON.parse(body).title);
+const episode = process.argv[2];
+
+request('https://swapi-api.hbtn.io/api/films/' + episode, (error, response, body) => {
+  if (error) {
+    console.log(error);
+  } else {
+    const json = JSON.parse(body);
+    console.log(json.title);
+  }
 });
